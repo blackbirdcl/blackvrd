@@ -1,9 +1,12 @@
+<!-- Home link simple -->
 
 <div style="margin: 1em 0 5em 0;">
 <a class="krown-button" href="https://blackvrd.com" target="_self" rel="noopener noreferrer" title="Home">Home</a>
 </div>
 
----
+
+
+<!-- home link complejo old -->
 
 <div style="margin: 1em 0 5em 0;">
 <a class="krown-button" href="https" target="_self" rel="noopener noreferrer" title="Previous Project"><</a>
@@ -13,6 +16,9 @@
 <a class="krown-button" href="https" target="_self" rel="noopener noreferrer" title="Next Project">></a>
 </div>
 
+
+
+<!-- pajaro volando arreglar position -->
 <style>
 @media(max-width: 500px){
 #loader{
@@ -21,22 +27,21 @@
 }
 @media(min-width: 501px){
 #loader{
-    left:49%!important;
-    
+    left:49%!important;   
 }
 }
-
 </style>
 
 
+<!-- base link -->
 <a class="krown-button" href="https" target="_blank" rel="noopener noreferrer" title="namehere">texthere</a>
 
 
 
 
+<!-- navegacion de botones hackeada ir a php includes porfolio -->
 
-
-
+<?php
 /*---------------------------------
 	Navigation Buttons
 ------------------------------------*/
@@ -63,24 +68,75 @@ function krown_nav_buttons( $taxonomy = 'portfolio_category', $page_option = 'kr
 
 	*/
 
+/* tittle added to links, and a 'touched' state into the general nav class */ 
+
 	$next_post = krown_get_adjacent_post( false, '', false, $taxonomy );
 	$prev_post = krown_get_adjacent_post( false, '', true, $taxonomy );
 
-	$btns_html = '<a class="btn-close" href="' . get_permalink( get_option( $page_option ) ) . '"><span class="front"></span><span class="back close-btn-special"></span></a>';
+	$btns_html = '<a title="Home" class="btn-close" href="' . get_permalink( get_option( $page_option ) ) . '"><span class="front"></span><span class="back close-btn-special"></span></a>';
 	$btns_no = 1;
 
 	if ( ! empty( $next_post ) ) {
-		$btns_html .= '<a class="btn-prev" href="' . get_permalink( $next_post->ID ) . '" data-slug="' . $next_post->post_name . '" data-title="' . get_the_title( $next_post->ID ) . ' | ' . get_bloginfo( 'name' ) . '" data-type="' . ( $project_type == 'default' ? get_post_meta( $next_post->ID, 'krown_project_type', true ) : $project_type ) . '"></a>';
+		$btns_html .= '<a title="Previous Project" class="btn-prev" href="' . get_permalink( $next_post->ID ) . '" data-slug="' . $next_post->post_name . '" data-title="' . get_the_title( $next_post->ID ) . ' | ' . get_bloginfo( 'name' ) . '" data-type="' . ( $project_type == 'default' ? get_post_meta( $next_post->ID, 'krown_project_type', true ) : $project_type ) . '"></a>';
 		$btns_no++;
 	}
 
 	if ( ! empty( $prev_post ) ) {
-		$btns_html .= '<a class="btn-next" href="' . get_permalink( $prev_post->ID ) . '" data-slug="' . $prev_post->post_name . '" data-title="' . get_the_title( $prev_post->ID ) . ' | ' . get_bloginfo( 'name' ) . '" data-type="' . ( $project_type == 'default' ? get_post_meta( $prev_post->ID, 'krown_project_type', true ) : $project_type ) . '"></a>';
+		$btns_html .= '<a title="Next Project" class="btn-next" href="' . get_permalink( $prev_post->ID ) . '" data-slug="' . $prev_post->post_name . '" data-title="' . get_the_title( $prev_post->ID ) . ' | ' . get_bloginfo( 'name' ) . '" data-type="' . ( $project_type == 'default' ? get_post_meta( $prev_post->ID, 'krown_project_type', true ) : $project_type ) . '"></a>';
 		$btns_no++;
 	}
 
-	$html = '<nav class="nav me-buttons btns-' . $btns_no . ' clearfix ' . $class . '"><div class="holder">'. $btns_html . '</div></nav>';
+	$html = '<nav class="nav me-buttons touched btns-' . $btns_no . ' clearfix ' . $class . '"><div class="holder">'. $btns_html . '</div></nav>';
 
 	echo $html;
 
 }
+
+/*---------------------------------
+	Share Buttons
+------------------------------------*/
+
+function krown_share_buttons( $post_id ){
+
+    <!-- share buttons modification -->
+	$html = '<aside class="share white me-buttons touched clearfix"><div class="holder">';
+
+		/* added yeye variable without encoding */
+		$urlyeye = get_permalink( $post_id );
+	$url = urlencode( get_permalink( $post_id ) );
+	$title = urlencode( get_the_title( $post_id ) );
+	$media = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'large' );
+
+
+	/* updated dynamic twtr url*/
+	$html .= '<a target="_blank" class="btn-twitter" href="' . $urlyeye . '?share=twitter"><span class="front"></span><span class="back"></span></a>';
+	
+	/* wrong url encoding
+	$html .= '<a target="_blank" class="btn-twitter" href="https://twitter.com/home?status=' . $title . '+' . $url . '"><span class="front"></span><span class="back"></span></a>';
+	*/
+
+	/* updated url encode for better human reading */
+	$html .= '<a target="_blank" class="btn-facebook" href="https://www.facebook.com/share.php?u=' . $urlyeye . '&title=' . $title . '"></a>';
+
+	$html .= '<a target="_blank" class="btn-pinterest" href="http://pinterest.com/pin/create/bookmarklet/?media=' . $media[0] . '&url=' . $url . '&is_video=false&description=' . $title . '"></a>';
+
+	/* service not working, removed from code
+	$html .= '<a target="_blank" class="btn-gplus" href="https://plus.google.com/share?url=' . $url . '"></a>';
+	*/
+
+	$html .= '</div></aside>';
+
+	echo $html;
+
+}
+
+
+/* 
+target construction:
+https://blackvrd.com/portfolio/imperial-crown/?share=twitter
+
+pseudocode:
+href="' . $urlyeye . '?share=twitter">
+*/
+
+?>
