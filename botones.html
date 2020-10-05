@@ -37,9 +37,9 @@
 <a class="krown-button" href="https" target="_blank" rel="noopener noreferrer" title="namehere">texthere</a>
 
 
+<script>
 
-
-<!-- navegacion de botones hackeada ir a php includes porfolio -->
+//  navegacion de botones hackeada ir a php includes porfolio -->
 
 <?php
 /*---------------------------------
@@ -47,26 +47,6 @@
 ------------------------------------*/
 
 function krown_nav_buttons( $taxonomy = 'portfolio_category', $page_option = 'krown_folio_page', $project_type = 'default', $class = 'transparent' ){
-
-	// In a future release (not sure about it though) - add option to navigation only between the same categories?!
-
-	/*
-
-	$cats_excluded = array();
-	$cats_included = array();
-
-	$cats_all = get_categories( array( 'taxonomy' => $taxonomy ) );
-
-	if( ! empty( $cats_included ) )
-		foreach ( $cats_all as $cat ) {
-			if ( ! in_array( $cat->slug, $cats_included ) ){
-				array_push( $cats_excluded, $cat->cat_ID );
-			}
-		}
-
-	$cats_excluded = implode( ', ', $cats_excluded );
-
-	*/
 
 /* tittle added to links, and a 'touched' state into the general nav class */ 
 
@@ -141,10 +121,15 @@ href="' . $urlyeye . '?share=twitter">
 
 ?>
 
+</script>
+
+
+
+
+
+
 <!-- fb iframe 100% wide for portfolio -->
 <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fweathergard%2Fphotos%2Fa.898467176881694%2F2772362126158847%2F&show_text=true&width=552&height=414&appId" width="auto" height="414px" style="border:none;overflow:hidden; max-width:100%; width:100%" height:414px; scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
-
-
 
 
 
@@ -163,120 +148,20 @@ Artwork.
 <a class="krown-button" href="https://blackvrd.com" target="_blank" rel="noopener noreferrer" title="Home">Home</a>
 </br>
 
-<div style="margin: 1em 0 5em 0;">
-<a class="krown-button" href="https://blackvrd.com" target="_self" rel="noopener noreferrer" title="Home">Home</a>
-</div>
 
 
 
 
 <style>
 
-.vertical-gallery{
-	background-size:cover!important;
-	webkit-background-size:cover!important;
-	background-attachment:fixed!important;
-	background-repeat:repeat!important;
-}
 
-</style>
+/* final CSS
+ccccccccccccccccccccccccccccccccccccc
+sssssssssssssssssssssssssssssssssssss
+sssssssssssssssssssssssssssssssssssss
 
-background-image:url(https://blackvrd.com/wp-content/uploads/2020/09/background-portfolio.gif)
-
-
-
-#logo img {
-    width: 110%;
-  }
-
-#logo::after{
-  content: "Blackvrd";
-  color: white;
-	margin: 1em 0 0 0;
-	display:block;
-  font-weight: bold;
-	font-size:2.2em;
-}
-
-@media all and (max-width: 980px) {
-  #logo {
-    width: 135px;
-		margin: -38px 0 0 0;
-  }
-  #logo img {
-    width: 100%;
-  }
-#logo::after{
-font-size:1.7em;
-position:absolute;
-top:15px;
-left:30px;
-
-}
-	
-	
-}
-
-
-.vertical-gallery li{
-	margin: 2em auto !important
-}
-
-.vertical-gallery{
-	 background-image: url(https://blackvrd.com/wp-content/uploads/2020/09/background.svg)!important;
-	background-position:30% 45%;
-	background-repeat:repeat;
-	background-attachment:fixed;
-	 background-color: black;
-  background-size:auto 200%;
-  will-change: transform;
-	
-}
-
- 
-/*
-.project-detail{
-	background: rgba(0,0,0,1)!important;
-}
 */
-.krown-button{
-	margin: 0.5em 0.5em 0 0;
-}
 
-.mCSB_dragger_bar{
-	background: rgba(50,120,230,0.5)!important;
-	width:10px!important;
-}
-
-.mCSB_dragger:hover .mCSB_dragger_bar{
-background: rgba(50,120,230,0.8)!important;
-}
-
-#loader{
-	background-position:center!important;
-	width:50px!important;
-	height:65px!important;
-	background-size: 50px 65px!important;
-}
-
-@media(max-width: 600px){
-#loader{
-    left:43%!important;
-}
-}
-@media(min-width: 601px){
-#loader{
-    left:48%!important;
-}
-}
-
-
-
-
-
-
-
-/// final CSS
 #logo img {
     width: 120%;
   }
@@ -447,3 +332,5 @@ body{
 	display:block!important;
 }
 */
+
+</style>
