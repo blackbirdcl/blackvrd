@@ -255,19 +255,27 @@
 
 	        optionsString += '<option data-href="' + $a.prop('href') + '"' + ($a.hasClass('filter') ? ' data-filter="' + $a.data('filter') + '"' : '') + ($a.hasClass('all-filter') ? ' class="all-filter"' : '') + ($a.prop('target') == 'blank' ? ' data-target="_blank"' : '') + '>' + $a.text() + '</option>';
 
-	        if($(this).hasClass('parent') && $(this).hasClass('selected')) {
+			
+			
+			//comentar esta linea para que no construya los links interiores en version mobile
+			//
+	       /* if($(this).hasClass('parent') && $(this).hasClass('selected')) {
 	            $(this).find('ul').find('a').each(function(){
 
 	                optionsString += '<option data-href="' + $(this).prop('href') + '"' + ($(this).hasClass('filter') ? ' data-filter="' + $(this).data('filter') + '"' : '') + ($(this).hasClass('all-filter') ? ' class="all-filter"' : '') + ($(this).prop('target') == 'blank' ? ' data-target="_blank"' : '') + '> -- ' + $(this).text() + '</option>';
 
 	            });
 
-	        }
+	        }*/
 
 	    });
+			
+	//	   $menu.append('<div class="responsive-menu"> <div id="myDropdown" class="dropdown-content"><a href="/about">About</a><a href="/portfolio">Portfolio</a><a href="/contact">contact</a></div>');
 
-	    $menu.append('<div class="responsive-menu"><select><option data-href="#">' + $menu.data('responsive-title') + '</option>' + optionsString + '</select></div>');
-
+	  //  $menu.append('<div class="responsive-menu"><select><option data-href="#">' + $menu.data('responsive-title') + '</option>' + optionsString + '</select></div>');
+			
+			$menu.append('<div class="responsive-menu"><select><option data-href="#">' + $menu.data('responsive-title') + '</option>' + optionsString + '</select></div>');
+			
 	    $('.responsive-menu').children('select').on('change', function(){
 
 	        var href = $(this).find('option:selected').data('href'),
@@ -296,6 +304,7 @@
 	        }
 
 	    });
+		
 
 	/* ----------------------------------------------------
 	---------- !! MEDIA QUERIES !! -----------------
@@ -832,8 +841,29 @@
 
 	        var touched = false;
 
+			
+			// creacion de variable global que obtiene y guarda la posicion del portfolio para usarla en la funcion de cerrar
+			
+			var	$portfolioScrollinterno;
+			
+			//aca comienza la funcion de click -
 	        $folioItems.click(function(e){
-
+				
+				
+			// Aca le damos a la variable global el valor del scroll al momento del click
+			// *******************************
+			// *******************************
+			// *******************************			
+			
+			$portfolioScrollinterno =  $('html').scrollTop();
+			console.log("blackvrd - " + $portfolioScrollinterno );
+				
+			// *******************************
+			// *******************************
+			// *******************************				
+				
+			
+				
 	            if(!touched || (touched && $(this).hasClass('hovered'))) {
 
 	                if($(this).data('custom-url') != 'yes') {
@@ -1208,14 +1238,14 @@
 		var animatefolio = function(){
 		
 
-		//agregamos la funcion que captura la posicion del #portfolio
-		var	$portfolioScrollinterno =  $('.folio-grid').offset().top;
+		//agregamos la funcion que captura la posicion del #portfolio // variable original
+		// var	$portfolioScrollinterno =  $('#portfolio').offset().top;
 		
-		//convertimos el numero negativo en positivo
-		var $portNegativeinterno = $portfolioScrollinterno*-1;	
+		//convertimos el numero negativo en valor absoluto
+		var $portNegativeinterno = Math.abs($portfolioScrollinterno);	
 		
 		//captura la variable y la envia a consola para revisar
-		console.log('portfolioPosY '+ $portNegativeinterno);
+		// console.log('portfolioPosY '+ $portNegativeinterno);
 	
 		//dios sabe que esta es la parte milagrosa de todo:
 		$('html').animate({scrollTop:$portNegativeinterno}, 500, 'easeOutQuad');	
@@ -1236,9 +1266,11 @@
 	         * 	         
 		*/
 
+	/*	window.onscroll = function() {
+		console.log('portfolioPosYnow '+ $('#portfolio').offset().top);
+		}
 			
-			
-			
+		*/	
 			
 			
 			
