@@ -37,7 +37,7 @@
 <a class="krown-button" href="https" target="_blank" rel="noopener noreferrer" title="namehere">texthere</a>
 
 
-<script>
+<script type="message/example">
 
 //  navegacion de botones hackeada ir a php includes porfolio -->
 
@@ -71,6 +71,17 @@ function krown_nav_buttons( $taxonomy = 'portfolio_category', $page_option = 'kr
 	echo $html;
 
 }
+
+
+// share is wrong so we correct ir again
+
+<a href="https://twitter.com/share?ref_src=" class="twitter-share-button" data-show-count="false">Tweet</a>
+
+http://twitter.com/share?text=<TITLE>&url=<URL>
+
+
+$html .= '<a target="_blank" class="btn-twitter"  data-show-count="false" href="https://twitter.com/share?url=' . $urlyeye . '"><span class="front"></span><span class="back"></span></a>';
+
 
 /*---------------------------------
 	Share Buttons
@@ -334,3 +345,8 @@ body{
 */
 
 </style>
+
+
+
+
+
